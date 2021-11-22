@@ -8,7 +8,7 @@ namespace TravelApp
 {
     public class TravelsList
     {
-        private const int EmptyLinesCount = 2;
+        private const int EmptyLinesCount = 1;
 
         private List<TravelData> travels = new List<TravelData>();
 

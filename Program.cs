@@ -53,17 +53,12 @@ namespace TravelApp
                         break;
                     case 5:
                         exitRender.Render();
-                        Environment.Exit(0);
-                        break;
+                        return;
                     default:
                         continue;
                 }
             }
         }
-
-
-
-
 
 
         static TravelData AddSingleTravel()
