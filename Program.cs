@@ -12,44 +12,34 @@ namespace TravelApp
         static void Main(string[] args)
         {
             TravelsList travels = new TravelsList();
-            IRender loadingMenu = new LoadingMenu();
-            IRender mainMenu = new MainMenuRenderer();
-            IRender travelTypeMenu = new TravelTypeRenderer();
-            IRender editTravelMenu = new TravelEditRenderer();
+            IRender loadingRenderer = new LoadingMenu();
+            IRender mainMenuRenderer = new MainMenuRenderer();
+            IRender travelTypeRenderer = new TravelTypeRenderer();
+            IRender editTravelRenderer = new TravelEditRenderer();
             IRender exitRender = new ExitRenderer();
+            IRender travelFilterRenderer = new TravelFilterRenderer();
 
-            loadingMenu.Render();
+            loadingRenderer.Render();
             while (true)
             {
-                mainMenu.Render();
+                mainMenuRenderer.Render();
                 int mainMenuChoice = int.Parse(Console.ReadLine());
 
                 switch (mainMenuChoice)
                 {
                     case 1:
-                        travelTypeMenu.Render();
-                        int choice = int.Parse(Console.ReadLine());
-
-                        if (choice == 1)
-                        {
-                            travels.AddTravel(AddSingleTravel());
-                        }
-                        else if (choice == 2)
-                        {
-                            travels.AddTravel(AddMultipleTravel());
-                        }
-                        else
-                        {
-                            travelTypeMenu.Render();
-                        }
+                        travelTypeRenderer.Render();
+                        GetTravelTypeChoice(travels, travelTypeRenderer);
                         break;
                     case 2:
                         travels.PrintingTravels();
                         break;
                     case 3:
-                        editTravelMenu.Render();
+                        editTravelRenderer.Render();
                         break;
                     case 4:
+                        travelFilterRenderer.Render();
+                        GetTravelFilterChoice(travels, travelFilterRenderer);
                         break;
                     case 5:
                         exitRender.Render();
@@ -60,6 +50,50 @@ namespace TravelApp
             }
         }
 
+        static void GetTravelTypeChoice(TravelsList travels, IRender travelTypeMenu)
+        {
+            int choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    travels.AddTravel(AddSingleTravel());
+                    break;
+                case 2:
+                    travels.AddTravel(AddMultipleTravel());
+                    break;
+                default:
+                    travelTypeMenu.Render();
+                    break;
+            }
+        }
+
+        static void GetTravelFilterChoice(TravelsList travels, IRender travelFilterMenu)
+        {
+            int choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    travels.FilterByShipName();
+                    break;
+                case 2:
+                    travels.FilterByShipCaptainName();
+                    break;
+                case 3:
+                    travels.FilterByShipPassagersCount();
+                    break;
+                case 4:
+                    travels.FilterByRouteFrom();
+                    break;
+                case 5:
+                    travels.FilterByRouteTo();
+                    break;
+                default:
+                    travelFilterMenu.Render();
+                    break;
+            }
+        }
 
         static TravelData AddSingleTravel()
         {
