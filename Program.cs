@@ -116,7 +116,7 @@ namespace TravelApp
 
             Console.Write("Enter Departure date (dd/mm/yyyy): ");
             string inputDeparture = Console.ReadLine();
-            int[] dateDeparture = new int[3];
+            DateTime dateDeparture;
 
             while (true)
             {
@@ -124,7 +124,9 @@ namespace TravelApp
 
                 if (match.Success)
                 {
-                    dateDeparture = inputDeparture.Split('/').Select(int.Parse).ToArray();
+                    int[] date = inputDeparture.Split('/').Select(int.Parse).ToArray();
+                    dateDeparture = new DateTime(date[2], date[1], date[0]);
+
                     break;
                 }
 
@@ -134,7 +136,7 @@ namespace TravelApp
 
             Console.Write("Enter Returning date (dd/mm/yyyy): ");
             string inputReturning = Console.ReadLine();
-            int[] dateReturning = new int[3];
+            DateTime dateReturning;
 
             while (true)
             {
@@ -142,9 +144,10 @@ namespace TravelApp
 
                 if (match.Success)
                 {
-                    dateReturning = inputReturning.Split('/').Select(int.Parse).ToArray();
+                    int[] date = inputReturning.Split('/').Select(int.Parse).ToArray();
+                    dateReturning = new DateTime(date[2], date[1], date[0]);
 
-                    if (DateValidator.IsValidDate(dateDeparture, dateReturning))
+                    if (dateDeparture < dateReturning)
                     {
                         break;
                     }

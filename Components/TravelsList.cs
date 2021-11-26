@@ -40,8 +40,8 @@ namespace TravelApp
             {
                 Console.WriteLine($"From: {item.Route.From} \nTo: {item.Route.To} \nShip name: {item.Ship.Name} \nCaptain name: {item.Ship.CaptainName} \n" +
                                   $"Ticket price: ${item.Ticket.Price} \nPassagers: {item.Ship.PassagersCount} \n" +
-                                  $"Date departing: {item.Date.Departing[0]}/{item.Date.Departing[1]}/{item.Date.Departing[2]} \n" +
-                                  $"Date returning: {item.Date.Returning[0]}/{item.Date.Returning[1]}/{item.Date.Returning[2]}");
+                                  $"Date departing: {item.Date.Departing.Day}/{item.Date.Departing.Month}/{item.Date.Departing.Year} \n" +
+                                  $"Date returning: {item.Date.Returning.Day}/{item.Date.Returning.Month}/{item.Date.Returning.Year}");
                 Console.WriteLine("............................");
             }
 
